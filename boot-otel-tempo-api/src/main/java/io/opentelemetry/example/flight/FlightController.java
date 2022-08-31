@@ -46,6 +46,9 @@ public class FlightController {
 	@GetMapping("/flights")
     public List<Flight> greeting(@RequestParam(value = "origin", defaultValue = "India") String origin, @RequestParam String type) throws IOException {
     	LOGGER.info("Before Service Method Call");
+    	if (type=="1"){
+    		this.steveCounter.increment();
+		}
 		String path = "/helloh";
 		requestCounter.labels(path).inc();
 //		lastRequestTimestamp.labels(path).setToCurrentTime();
