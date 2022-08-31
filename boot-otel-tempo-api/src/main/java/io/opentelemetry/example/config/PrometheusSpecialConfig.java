@@ -11,8 +11,8 @@ public class PrometheusSpecialConfig {
 // org.springframework.context.annotation.Bean
 // io.micrometer.core.instrument.MeterRegistry
 
-    @Bean
-    public TimedAspect timedAspect(MeterRegistry registry) {
-        return new TimedAspect(registry);
-    }
+//    @Bean
+//    public TimedAspect timedAspect(MeterRegistry registry) {
+//        return new TimedAspect(registry);
+//    }
 }

@@ -43,11 +43,11 @@ public class FlightController {
 		this.flightService = flightService;
 	}
 
-	@Timed(value = "greeting.time", description = "Time taken to return greeting")
+//	@Timed(value = "greeting.time", description = "Time taken to return greeting")
 	@GetMapping("/flights")
     public List<Flight> greeting(@RequestParam(value = "origin", defaultValue = "India") String origin, @RequestParam String type) throws IOException {
     	LOGGER.info("Before Service Method Call");
-		String path = "/hello%hamish";
+		String path = "/helloh";
 		requestCounter.labels(path).inc();
 //		lastRequestTimestamp.labels(path).setToCurrentTime();
 //		Histogram.Timer histogramRequestTimer = requestDurationHistogram.labels(path).startTimer();
