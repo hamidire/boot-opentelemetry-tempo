@@ -3,6 +3,7 @@ package io.opentelemetry.example.flight;
 import java.io.IOException;
 import java.util.List;
 
+import io.micrometer.core.annotation.Timed;
 import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
@@ -41,7 +42,8 @@ public class FlightController {
 	public FlightController(FlightService flightService) {
 		this.flightService = flightService;
 	}
-	
+
+	@Timed(value = "flights.time", description = "Time taken to return greeting")
 	@GetMapping("/flights")
     public List<Flight> greeting(@RequestParam(value = "origin", defaultValue = "India") String origin) throws IOException {
     	LOGGER.info("Before Service Method Call");
