@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class FlightController {
 
 	// Counter should have Exemplars when the OpenTelemetry agent is attached.
-//	private final Counter requestCounter = Counter.build().name("requests_total").help("Total number of requests.")
-//			.labelNames("path").register();
+	private final Counter requestCounter = Counter.build().name("requests_greeting_counter_total").help("Total number of requests.")
+			.labelNames("path").register();
 //
 //	// Gauges don't have Exemplars.
 //	private final Gauge lastRequestTimestamp = Gauge.build().name("last_request_timestamp")
@@ -45,10 +45,10 @@ public class FlightController {
 
 	@Timed(value = "greeting.time", description = "Time taken to return greeting")
 	@GetMapping("/flights")
-    public List<Flight> greeting(@RequestParam(value = "origin", defaultValue = "India") String origin) throws IOException {
+    public List<Flight> greeting(@RequestParam(value = "origin", defaultValue = "India") String origin, @RequestParam String type) throws IOException {
     	LOGGER.info("Before Service Method Call");
 		String path = "/hello%hamish";
-//		requestCounter.labels(path).inc();
+		requestCounter.labels(path).inc();
 //		lastRequestTimestamp.labels(path).setToCurrentTime();
 //		Histogram.Timer histogramRequestTimer = requestDurationHistogram.labels(path).startTimer();
 //		Summary.Timer summaryRequestTimer = requestDurationSummary.labels(path).startTimer();
