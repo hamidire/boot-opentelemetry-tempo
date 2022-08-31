@@ -18,22 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class FlightController {
 
 	// Counter should have Exemplars when the OpenTelemetry agent is attached.
-	private final Counter requestCounter = Counter.build().name("requests_total").help("Total number of requests.")
-			.labelNames("path").register();
-
-	// Gauges don't have Exemplars.
-	private final Gauge lastRequestTimestamp = Gauge.build().name("last_request_timestamp")
-			.help("unix time of the last request").labelNames("path").register();
-
-	// Histogram should have Exemplars when the OpenTelemetry agent is attached.
-	private final Histogram requestDurationHistogram = Histogram.build().name("request_duration_histogram")
-			.help("Request duration in seconds").labelNames("path")
-			.buckets(0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009).register();
-
-	// Summaries don't have Exemplars
-	private final Summary requestDurationSummary = Summary.build().name("request_duration_summary")
-			.help("Request duration in seconds").labelNames("path").quantile(0.75, 0.01).quantile(0.85, 0.01)
-			.register();
+//	private final Counter requestCounter = Counter.build().name("requests_total").help("Total number of requests.")
+//			.labelNames("path").register();
+//
+//	// Gauges don't have Exemplars.
+//	private final Gauge lastRequestTimestamp = Gauge.build().name("last_request_timestamp")
+//			.help("unix time of the last request").labelNames("path").register();
+//
+//	// Histogram should have Exemplars when the OpenTelemetry agent is attached.
+//	private final Histogram requestDurationHistogram = Histogram.build().name("request_duration_histogram")
+//			.help("Request duration in seconds").labelNames("path")
+//			.buckets(0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009).register();
+//
+//	// Summaries don't have Exemplars
+//	private final Summary requestDurationSummary = Summary.build().name("request_duration_summary")
+//			.help("Request duration in seconds").labelNames("path").quantile(0.75, 0.01).quantile(0.85, 0.01)
+//			.register();
 	
 	 private static final Logger LOGGER = LoggerFactory.getLogger(FlightController.class);
 	
@@ -48,13 +48,13 @@ public class FlightController {
     public List<Flight> greeting(@RequestParam(value = "origin", defaultValue = "India") String origin) throws IOException {
     	LOGGER.info("Before Service Method Call");
 		String path = "/hello%hamish";
-		requestCounter.labels(path).inc();
-		lastRequestTimestamp.labels(path).setToCurrentTime();
-		Histogram.Timer histogramRequestTimer = requestDurationHistogram.labels(path).startTimer();
-		Summary.Timer summaryRequestTimer = requestDurationSummary.labels(path).startTimer();
+//		requestCounter.labels(path).inc();
+//		lastRequestTimestamp.labels(path).setToCurrentTime();
+//		Histogram.Timer histogramRequestTimer = requestDurationHistogram.labels(path).startTimer();
+//		Summary.Timer summaryRequestTimer = requestDurationSummary.labels(path).startTimer();
 		List<Flight> list = flightService.getFlights(origin);
-		histogramRequestTimer.observeDuration();
-		summaryRequestTimer.observeDuration();
+//		histogramRequestTimer.observeDuration();
+//		summaryRequestTimer.observeDuration();
 		try {
 			// Generate some random errors
 //			randomError(path);
@@ -68,8 +68,8 @@ public class FlightController {
 
 
 		} finally {
-			histogramRequestTimer.observeDuration();
-			summaryRequestTimer.observeDuration();
+//			histogramRequestTimer.observeDuration();
+//			summaryRequestTimer.observeDuration();
 		}
         return list;
     }
