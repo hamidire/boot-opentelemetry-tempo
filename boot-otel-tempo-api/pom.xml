@@ -81,7 +81,7 @@
 	                    -Dotel.exporter.jaeger.endpoint=localhost:14250  
 	                    -Dotel.resource.attributes=service.name=${project.artifactId} 
 	                    -Dotel.javaagent.debug=false 
-<!--	                    -Dotel.metrics.exporter=none-->
+	                    -Dotel.metrics.exporter=none
 	                </argLine>
 	            </configuration>
 			</plugin>
