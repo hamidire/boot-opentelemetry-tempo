@@ -43,7 +43,7 @@ public class FlightController {
 		this.flightService = flightService;
 	}
 
-	@Timed(value = "flights.time", description = "Time taken to return greeting")
+	@Timed(value = "greeting.time", description = "Time taken to return greeting")
 	@GetMapping("/flights")
     public List<Flight> greeting(@RequestParam(value = "origin", defaultValue = "India") String origin) throws IOException {
     	LOGGER.info("Before Service Method Call");
