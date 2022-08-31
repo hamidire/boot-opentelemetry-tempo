@@ -3,11 +3,8 @@ package io.opentelemetry.example.flight;
 import java.io.IOException;
 import java.util.List;
 
-import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.prometheus.client.Counter;
-import io.prometheus.client.Gauge;
-import io.prometheus.client.Histogram;
-import io.prometheus.client.Summary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FlightController {
 
 	// Counter should have Exemplars when the OpenTelemetry agent is attached.
+	private io.micrometer.core.instrument.Counter steveCounter;
 	private final Counter requestCounter = Counter.build().name("requests_greeting_counter_total").help("Total number of requests.")
 			.labelNames("path").register();
 //
@@ -39,8 +37,9 @@ public class FlightController {
 	
 	private FlightService flightService;
 	
-	public FlightController(FlightService flightService) {
+	public FlightController(FlightService flightService, MeterRegistry registry) {
 		this.flightService = flightService;
+		this.steveCounter = registry.counter("find_steve","1","2");
 	}
 
 //	@Timed(value = "greeting.time", description = "Time taken to return greeting")
