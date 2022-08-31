@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class PrometheusConfig {
+public class PrometheusSpecialConfig {
     // io.micrometer.core.aop.TimedAspect
 // org.springframework.context.annotation.Bean
 // io.micrometer.core.instrument.MeterRegistry
