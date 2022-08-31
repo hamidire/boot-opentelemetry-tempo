@@ -57,7 +57,7 @@ public class FlightController {
 		summaryRequestTimer.observeDuration();
 		try {
 			// Generate some random errors
-			randomError(path);
+//			randomError(path);
 
 			// Randomly sleeps a bit
 			try {
